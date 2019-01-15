@@ -1,31 +1,35 @@
 const title = document.querySelector('.title');
 title.textContent = 'NutrIMC';
 
-const patient = document.querySelector('#first-patient');
+const patients = document.querySelectorAll('.paciente');
 
-const tdWeight = patient.querySelector('.info-peso');
-const weight = tdWeight.textContent;
+for (let i = 0; i < patients.length; i++) {
+    const patient = patients[i];
+    const tdWeight = patient.querySelector('.info-peso');
+    const weight = tdWeight.textContent;
 
-const tdHeight = patient.querySelector('.info-altura');
-const height = tdHeight.textContent;
+    const tdHeight = patient.querySelector('.info-altura');
+    const height = tdHeight.textContent;
 
-const tdIMC = patient.querySelector('.info-imc');
+    const tdIMC = patient.querySelector('.info-imc');
 
-isValidWeight = true;
-isValidHeight = true;
+    isValidWeight = true;
+    isValidHeight = true;
 
-if (weight <= 0 || weight >= 1000) {
-    tdWeight.textContent = 'Weight is invalid!';
-    isValidWeight = false;
-}
+    if (weight <= 0 || weight >= 1000) {
+        tdWeight.textContent = 'Weight is invalid!';
+        isValidWeight = false;
+    }
 
-if (height <= 0 || height >= 3) {
-    tdHeight.textContent = 'Height is invalid!';
-    isValidHeight = false;
-}
+    if (height <= 0 || height >= 3) {
+        tdHeight.textContent = 'Height is invalid!';
+        isValidHeight = false;
+    }
 
-if (isValidHeight && isValidWeight) {
-    tdIMC.textContent = weight / (height * height);
-} else {
-    tdIMC.textContent = 'Height and/or weight invalids!'
+    if (isValidHeight && isValidWeight) {
+        const imc = weight / (height * height);
+        tdIMC.textContent = imc.toFixed(2);
+    } else {
+        tdIMC.textContent = 'Height and/or weight invalids!'
+    }
 }
