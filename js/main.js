@@ -30,6 +30,7 @@ for (let i = 0; i < patients.length; i++) {
         const imc = weight / (height * height);
         tdIMC.textContent = imc.toFixed(2);
     } else {
-        tdIMC.textContent = 'Height and/or weight invalids!'
+        tdIMC.textContent = 'Height and/or weight invalids!';
+        patient.classList.add('data-invalid');
     }
 }
