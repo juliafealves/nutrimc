@@ -1,6 +1,3 @@
-const title = document.querySelector('.title');
-title.textContent = 'NutrIMC';
-
 const patients = document.querySelectorAll('.paciente');
 
 for (let i = 0; i < patients.length; i++) {
