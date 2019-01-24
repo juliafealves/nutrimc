@@ -24,43 +24,15 @@ for (let i = 0; i < patients.length; i++) {
     }
 
     if (isValidHeight && isValidWeight) {
-        const imc = weight / (height * height);
-        tdIMC.textContent = imc.toFixed(2);
+        tdIMC.textContent = calculateImc(weight, height);
     } else {
         tdIMC.textContent = 'Height and/or weight invalids!';
         patient.classList.add('data-invalid');
     }
 }
 
-const addButton = document.querySelector('#adicionar-paciente');
-addButton.addEventListener('click', event => {
-    event.preventDefault();
+function calculateImc(weight, height) {
+    const imc = weight / (height * height);
 
-    const form = document.querySelector('#form-adiciona');
-
-    const tr = document.createElement('tr');
-
-    const tdName = document.createElement('td');
-    tdName.textContent = form.nome.value;
-
-    const tdWeight = document.createElement('td');
-    tdWeight.textContent = form.peso.value;
-
-    const tdHeight = document.createElement('td');
-    tdHeight.textContent = form.altura.value;
-
-    const tdFat = document.createElement('td');
-    tdFat.textContent = form.gordura.value;
-
-    const tdImc = document.createElement('td');
-    tdImc.textContent = 0;
-
-    tr.appendChild(tdName);
-    tr.appendChild(tdWeight);
-    tr.appendChild(tdHeight);
-    tr.appendChild(tdFat);
-    tr.appendChild(tdImc);
-
-    const table = document.querySelector('#tabela-pacientes');
-    table.appendChild(tr);
-});
+    return imc.toFixed(2);
+}
