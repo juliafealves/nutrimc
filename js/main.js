@@ -10,17 +10,15 @@ for (let i = 0; i < patients.length; i++) {
 
     const tdIMC = patient.querySelector('.info-imc');
 
-    isValidWeight = true;
-    isValidHeight = true;
+    isValidWeight = validateWeight(weight);
+    isValidHeight = validateHeight(height);
 
-    if (weight <= 0 || weight >= 1000) {
+    if (!isValidWeight) {
         tdWeight.textContent = 'Weight is invalid!';
-        isValidWeight = false;
     }
 
-    if (height <= 0 || height >= 3) {
+    if (!isValidHeight) {
         tdHeight.textContent = 'Height is invalid!';
-        isValidHeight = false;
     }
 
     if (isValidHeight && isValidWeight) {
@@ -35,4 +33,24 @@ function calculateImc(weight, height) {
     const imc = weight / (height * height);
 
     return imc.toFixed(2);
+}
+
+function validateHeight(height) {
+    let isValid = false;
+
+    if(height > 0 && height <= 3) {
+        isValid = true;
+    }
+
+    return isValid;
+}
+
+function validateWeight(weight) {
+    let isValid = false;
+
+    if(weight > 0 && weight <= 1000) {
+        isValid = true;
+    }
+
+    return isValid;
 }

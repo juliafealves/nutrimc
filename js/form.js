@@ -5,10 +5,19 @@ addButton.addEventListener('click', event => {
     const form = document.querySelector('#form-adiciona');
     const patient = getPatientByForm(form);
     const tr = createTr(patient);
-    const table = document.querySelector('#tabela-pacientes');
-    table.appendChild(tr);
+    const errors = validatedPatient(patient);
 
-    form.reset();
+    if (errors.length > 0) {
+        showErrorMessage(errors);
+    } else {
+        const table = document.querySelector('#tabela-pacientes');
+        table.appendChild(tr);
+
+        form.reset();
+
+        const errorsMessages = document.querySelector('#errors-messages');
+        errorsMessages.innerHTML = '';
+    }
 });
 
 function getPatientByForm(form) {
@@ -39,4 +48,45 @@ function createTd(data, className) {
     td.textContent = data;
 
     return td;
+}
+
+function showErrorMessage(errors) {
+    const ul = document.querySelector('#errors-messages');
+    ul.innerHTML = '';
+
+    errors.forEach(function (error) {
+        const li = document.createElement('li');
+        li.textContent = error;
+        ul.appendChild(li);
+    });
+}
+
+function validatedPatient(patient) {
+    const errors = [];
+
+    if (!patient.name.length) {
+        errors.push('Name is required.');
+    }
+
+    if (!patient.weight.length) {
+        errors.push('Weight is required.');
+    }
+
+    if (!patient.height.length) {
+        errors.push('Height is required.');
+    }
+
+    if (!patient.fat.length) {
+        errors.push('Fat is required.');
+    }
+
+    if (!validateHeight(patient.height)) {
+        errors.push('Height is invalid.');
+    }
+
+    if (!validateWeight(patient.weight)) {
+        errors.push('Weight is invalid.');
+    }
+
+    return errors;
 }
